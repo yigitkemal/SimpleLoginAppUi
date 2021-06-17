@@ -1,5 +1,4 @@
-# flutter_shared_pref_ex
-
+# Flutter Simple Login UI
 A new Flutter application.
 
 ## Getting Started

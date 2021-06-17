@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   shared_preferences: ^2.0.6
+  fluttericon: ^2.0.0
   flutter:
     sdk: flutter
 
@@ -44,7 +45,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets
+  assets:
+    - images/background.jpg
+    - images/note.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

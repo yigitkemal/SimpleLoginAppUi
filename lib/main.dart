@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shared_pref_ex/SayfaA.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -11,13 +13,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: MyHomePage(title: 'Web ile devam ediyorum'),
+    return Sizer(
+      builder: (context, orientation, deviceType){
+        return MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+          ),
+          home: MyHomePage(title: 'Web ile devam ediyorum'),
+        );
+      }
     );
   }
 }
@@ -64,6 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
+                  constraints: BoxConstraints(
+                    minHeight: 700,
+                    minWidth: 500,
+                  ),
                   margin: EdgeInsets.all(100),
                   width: (MediaQuery.of(context).size.width / 5)*2,
                   decoration: BoxDecoration(
@@ -84,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 100),
-                        child: Text("Login",style: TextStyle(fontSize: 50,color: Colors.black26,),textAlign: TextAlign.left,),
+                        child: Text("Log in",style: TextStyle(fontSize: 15.sp,color: Colors.black,),textAlign: TextAlign.left,),
                       ),
                       Container(
                           padding:
@@ -104,18 +114,26 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             Expanded(
                               child: Container(
+                                color: Colors.yellow,
                                 height: 100,
                                 padding: EdgeInsets.symmetric(vertical: 20),
                                 child: ElevatedButton(
                                   child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 20),
+                                    color: Colors.green,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(FontAwesome5.google),
+                                        Icon(FontAwesome5.google,size: 2.w,),
                                         SizedBox(width: 10,),
-                                        Text("Google ile Giriş Yap")
+                                        Text("Google ile Giriş Yap",style: TextStyle(fontSize: 4.sp),)
                                       ],
                                     ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.pink,
+                                    alignment: Alignment.center,
                                   ),
                                   onPressed: (){},
                                 ),
@@ -131,9 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     margin: EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       children: [
-                                        Icon(FontAwesome5.google),
+                                        Icon(FontAwesome5.apple,size: 2.w,),
                                         SizedBox(width: 10,),
-                                        Text("Google ile Giriş Yap")
+                                        Text("Apple ile Giriş Yap",style: TextStyle(fontSize: 4.sp,),)
                                       ],
                                     ),
                                   ),

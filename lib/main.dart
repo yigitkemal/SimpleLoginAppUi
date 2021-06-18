@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared_pref_ex/SayfaA.dart';
+import 'package:flutter_shared_pref_ex/CustomTextfield.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:roundcheckbox/roundcheckbox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.purple,
+            primarySwatch: Colors.grey,
           ),
           home: MyHomePage(title: 'Web ile devam ediyorum'),
         );
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -37,6 +38,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool checkedValue = false;
+
   Future<void> dataLog() async {
     var sp = await SharedPreferences.getInstance();
     sp.setString("name", "ahmet");
@@ -75,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     minWidth: 500,
                   ),
                   margin: EdgeInsets.all(100),
+                  padding: EdgeInsets.symmetric(horizontal: 100),
                   width: (MediaQuery.of(context).size.width / 5)*2,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -93,47 +98,81 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 100),
-                        child: Text("Log in",style: TextStyle(fontSize: 15.sp,color: Colors.black,),textAlign: TextAlign.left,),
+                        child: Text("Log in",style: TextStyle(fontSize: 15.sp,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
                       ),
                       Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                          child: TextField()),
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("This is an example of a login page written in Flutter.",style: TextStyle(fontSize: 5.sp,fontWeight: FontWeight.w200,color: Colors.grey,),textAlign: TextAlign.left,),
+                      ),
+                      SizedBox(height: 50,),
                       Container(
                           padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                          child: TextField()),
+                          EdgeInsets.symmetric(vertical: 10),
+                          child: CustomTextField(
+                            baslik: "Nickname",
+                            isLighter: true,
+                          )),
                       Container(
                           padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                          child: TextField()),
+                          EdgeInsets.symmetric(vertical: 10),
+                          child: CustomTextField(
+                            baslik: "E-Mail",
+                            isLighter: true,
+                          )),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 100),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 10),
+                          child: CustomTextField(
+                            baslik: "Password",
+                            isLighter: true,
+                            obsecure: true,
+                          )),
+                      Container(
+                          padding:
+                          EdgeInsets.symmetric(vertical: 10),
+                          child: CustomTextField(
+                            baslik: "Password Again",
+                            isLighter: true,
+                            obsecure: true,
+                          )),
+                      RoundCheckBox(
+                        onTap: (selected){
+                        },
+                        uncheckedColor: Colors.white,
+                        checkedColor: Colors.deepPurple.shade900,
+                        borderColor: Colors.grey,
+                      ),
+                      Container(
                         child: Row(
                           children: [
                             Expanded(
                               child: Container(
-                                color: Colors.yellow,
+                                //color: Colors.yellow,
                                 height: 100,
                                 padding: EdgeInsets.symmetric(vertical: 20),
                                 child: ElevatedButton(
                                   child: Container(
-                                    color: Colors.green,
+                                    //color: Colors.green,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(FontAwesome5.google,size: 2.w,),
+                                        Icon(FontAwesome5.google,size: 2.w,color: Colors.purple.shade900,),
                                         SizedBox(width: 10,),
-                                        Text("Google ile Giriş Yap",style: TextStyle(fontSize: 4.sp),)
+                                        Text("Login With Google",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
                                       ],
                                     ),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.pink,
+                                    //primary: Colors.pink,
+                                    primary: Colors.white,
+                                    side: BorderSide(width: 2,color: Colors.purple.shade900,),
                                     alignment: Alignment.center,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(width: 2,color: Colors.purple.shade900,),
+                                    ),
                                   ),
                                   onPressed: (){},
                                 ),
@@ -144,31 +183,37 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Container(
                                 height: 100,
                                 padding: EdgeInsets.symmetric(vertical: 20),
+
                                 child: ElevatedButton(
                                   child: Container(
                                     margin: EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(FontAwesome5.apple,size: 2.w,),
+                                        Icon(FontAwesome5.apple,size: 2.w,color: Colors.purple.shade900,),
                                         SizedBox(width: 10,),
-                                        Text("Apple ile Giriş Yap",style: TextStyle(fontSize: 4.sp,),)
+                                        Text("Login With Apple",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
                                       ],
                                     ),
                                   ),
                                   onPressed: (){},
+                                  style: ElevatedButton.styleFrom(
+                                    //primary: Colors.pink,
+                                    primary: Colors.white,
+                                    side: BorderSide(width: 2,color: Colors.purple.shade900,),
+                                    alignment: Alignment.center,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(width: 2,color: Colors.purple.shade900,),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            dataLog();
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => SayfaA()));
-                          },
-                          child: Text("İkinci Sayfa"))
+
                     ],
                   ),
                 ),
@@ -182,4 +227,29 @@ class _MyHomePageState extends State<MyHomePage> {
       ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+
+
+
 }
+
+
+
+/*
+CheckboxListTile(
+                        title: Text("Remember Me"),
+                        activeColor: Colors.purple.shade900,
+                        checkColor: Colors.purple.shade900,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          side: BorderSide(width: 2,color: Colors.purple.shade900,),
+                        ),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            checkedValue = newValue;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                      ),
+ */

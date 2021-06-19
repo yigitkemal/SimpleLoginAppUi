@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> dataLog() async {
     var sp = await SharedPreferences.getInstance();
-    sp.setString("name", "ahmet");
+    sp.setString("name", "John");
     sp.setInt("yas", 18);
     sp.setBool("bekarMi", true);
   }
@@ -98,11 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        child: Text("Log in",style: TextStyle(fontSize: 15.sp,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
+                        child: Text("Sign Up",style: TextStyle(fontSize: 15.sp,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 10),
-                        child: Text("This is an example of a login page written in Flutter.",style: TextStyle(fontSize: 5.sp,fontWeight: FontWeight.w200,color: Colors.grey,),textAlign: TextAlign.left,),
+                        child: Text("This is an example of a signup page written in Flutter.",style: TextStyle(fontSize: 5.sp,fontWeight: FontWeight.w200,color: Colors.grey,),textAlign: TextAlign.left,),
                       ),
                       SizedBox(height: 50,),
                       Container(
@@ -135,12 +135,40 @@ class _MyHomePageState extends State<MyHomePage> {
                             isLighter: true,
                             obsecure: true,
                           )),
-                      RoundCheckBox(
-                        onTap: (selected){
-                        },
-                        uncheckedColor: Colors.white,
-                        checkedColor: Colors.deepPurple.shade900,
-                        borderColor: Colors.grey,
+                      SizedBox(height: 1.h,),
+                      Row(
+                        children: [
+                          RoundCheckBox(
+                            onTap: (selected){},
+                            size: 20,
+                            uncheckedColor: Colors.white,
+                            checkedColor: Colors.deepPurple.shade900,
+                            borderColor: Colors.grey,
+                          ),
+                          SizedBox(width: 5,),
+                          Text("By creating an account, I agree to the privacy policy.",style: TextStyle(color: Colors.grey,fontSize: 4.sp),)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(child: Divider(color: Colors.grey,height: 2,)),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 1.w),
+                              child: Center(child: Text("OR",style: TextStyle(fontSize: 5.sp,color: Colors.grey),)),
+                            ),
+                            Expanded(child: Divider(color: Colors.grey,height: 2,))
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2.h,
                       ),
                       Container(
                         child: Row(
@@ -148,8 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Expanded(
                               child: Container(
                                 //color: Colors.yellow,
-                                height: 100,
-                                padding: EdgeInsets.symmetric(vertical: 20),
+                                height: 60,
                                 child: ElevatedButton(
                                   child: Container(
                                     //color: Colors.green,
@@ -160,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         Icon(FontAwesome5.google,size: 2.w,color: Colors.purple.shade900,),
                                         SizedBox(width: 10,),
-                                        Text("Login With Google",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
+                                        Text("Sign Up With Google",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
                                       ],
                                     ),
                                   ),
@@ -181,9 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(width: 20,),
                             Expanded(
                               child: Container(
-                                height: 100,
-                                padding: EdgeInsets.symmetric(vertical: 20),
-
+                                height: 60,
                                 child: ElevatedButton(
                                   child: Container(
                                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -192,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         Icon(FontAwesome5.apple,size: 2.w,color: Colors.purple.shade900,),
                                         SizedBox(width: 10,),
-                                        Text("Login With Apple",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
+                                        Text("Sign Up With Apple",style: TextStyle(fontSize: 4.sp,color: Colors.purple.shade900),)
                                       ],
                                     ),
                                   ),
@@ -213,7 +238,25 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
-
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Container(
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Already have an acoount? ',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              TextSpan(
+                                text: 'Sign In!',
+                                style: TextStyle(color: Colors.purple.shade900),
+                              ),
+                            ]
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -115,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                                     padding:
                                     EdgeInsets.symmetric(vertical: 10),
                                     child: CustomTextField(
-                                      baslik: "E-Mail",
+                                      baslik: "E-Mail or Nickname",
                                       isLighter: true,
                                       onSaved: (input) => userName = input,
                                     )),

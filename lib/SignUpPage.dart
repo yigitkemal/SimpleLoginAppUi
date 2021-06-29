@@ -5,6 +5,7 @@ import 'package:flutter_shared_pref_ex/CustomTextfield.dart';
 import 'package:flutter_shared_pref_ex/SignInPage.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -13,6 +14,31 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  String mail,password,nickName;
+
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    initalizePreference().whenComplete((){
+      setState(() {});
+    });
+  }
+
+  Future<void> initalizePreference() async{
+    this.sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  Future<void> saveUserInformation(String nickName, String mail, String password) async{
+    sharedPreferences.setString('nickName', nickName);
+    sharedPreferences.setString('mail', mail);
+    sharedPreferences.setString('password', password);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,36 +96,42 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text("This is an example of a signup page written in Flutter.",style: TextStyle(fontSize: 5.sp,fontWeight: FontWeight.w200,color: Colors.grey,),textAlign: TextAlign.left,),
                         ),
                         SizedBox(height: 50,),
-                        Container(
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              baslik: "Nickname",
-                              isLighter: true,
-                            )),
-                        Container(
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              baslik: "E-Mail",
-                              isLighter: true,
-                            )),
-                        Container(
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              baslik: "Password",
-                              isLighter: true,
-                              obsecure: true,
-                            )),
-                        Container(
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              baslik: "Password Again",
-                              isLighter: true,
-                              obsecure: true,
-                            )),
+                        Form(
+                          child: Column(
+                            children: [
+                              Container(
+                                  padding:
+                                  EdgeInsets.symmetric(vertical: 10),
+                                  child: CustomTextField(
+                                    baslik: "Nickname",
+                                    isLighter: true,
+                                  )),
+                              Container(
+                                  padding:
+                                  EdgeInsets.symmetric(vertical: 10),
+                                  child: CustomTextField(
+                                    baslik: "E-Mail",
+                                    isLighter: true,
+                                  )),
+                              Container(
+                                  padding:
+                                  EdgeInsets.symmetric(vertical: 10),
+                                  child: CustomTextField(
+                                    baslik: "Password",
+                                    isLighter: true,
+                                    obsecure: true,
+                                  )),
+                              Container(
+                                  padding:
+                                  EdgeInsets.symmetric(vertical: 10),
+                                  child: CustomTextField(
+                                    baslik: "Password Again",
+                                    isLighter: true,
+                                    obsecure: true,
+                                  )),
+                            ],
+                          ),
+                        ),
                         SizedBox(height: 1.h,),
                         Row(
                           children: [
@@ -115,7 +147,44 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                         SizedBox(
-                          height: 2.h,
+                          height: 1.h,
+                        ),
+                        Container(
+                          height: 60,
+                          margin: EdgeInsets.symmetric(horizontal: 60),
+                          child: ElevatedButton(
+                            child: Container(
+                              //color: Colors.green,
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Sign Up", style: TextStyle(
+                                      fontSize: 6.sp,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),),
+                                ],
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.purple.shade900,
+                              side: BorderSide(
+                                width: 2, color: Colors.purple.shade900,),
+                              alignment: Alignment.center,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: BorderSide(
+                                  width: 2, color: Colors.purple.shade900,),
+                              ),
+                            ),
+                            onPressed: () {
+                              saveUserInformation(nickName,mail,password);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1.h,
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -133,7 +202,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 2.h,
+                          height: 1.h,
                         ),
                         Container(
                           child: Row(

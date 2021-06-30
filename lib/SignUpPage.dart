@@ -15,8 +15,9 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
-  String mail,password,nickName;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  String mail,password,nickName;
   SharedPreferences sharedPreferences;
 
   @override
@@ -31,10 +32,13 @@ class _SignUpPageState extends State<SignUpPage> {
     this.sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> saveUserInformation(String nickName, String mail, String password) async{
+  Future<void> saveUserInformation(BuildContext context) async{
+    _formKey.currentState.save();
     sharedPreferences.setString('nickName', nickName);
     sharedPreferences.setString('mail', mail);
     sharedPreferences.setString('password', password);
+
+    print("------------------------------------------------" + nickName + ' ' + mail + ' ' + password );
   }
 
 
@@ -97,6 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         SizedBox(height: 50,),
                         Form(
+                          key: _formKey,
                           child: Column(
                             children: [
                               Container(
@@ -105,6 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: CustomTextField(
                                     baslik: "Nickname",
                                     isLighter: true,
+                                    onSaved: (input) => nickName = input,
                                   )),
                               Container(
                                   padding:
@@ -112,6 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: CustomTextField(
                                     baslik: "E-Mail",
                                     isLighter: true,
+                                    onSaved: (input) => mail = input,
                                   )),
                               Container(
                                   padding:
@@ -120,6 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     baslik: "Password",
                                     isLighter: true,
                                     obsecure: true,
+                                    onSaved: (input) => password = input,
                                   )),
                               Container(
                                   padding:
@@ -179,7 +187,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                             onPressed: () {
-                              saveUserInformation(nickName,mail,password);
+                              saveUserInformation(context);
                             },
                           ),
                         ),

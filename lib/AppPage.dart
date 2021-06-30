@@ -7,13 +7,21 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  String userName, password;
+  String userName= 'emptyness', password;
+
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    readInfo();
+  }
 
   Future<void> readInfo() async {
-    var sharedPreferences = SharedPreferences.getInstance();
+    sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
-      //userName =
+      userName = sharedPreferences.getString('mail');
     });
 
   }
@@ -28,7 +36,7 @@ class _AppPageState extends State<AppPage> {
           width: 100,
           height: 100,
           child: Text(
-            userName
+            userName,style: TextStyle(color: Colors.black),
           ),
         ),
       ),

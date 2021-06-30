@@ -6,6 +6,7 @@ import 'package:flutter_shared_pref_ex/CustomTextfield.dart';
 import 'package:flutter_shared_pref_ex/SignUpPage.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,14 +16,28 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
 
-  String userName, password;
+  String mail,password,nickName;
+  String mail2,password2,nickName2;
+
+
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Future<void> loadUserInformation() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    nickName2 = sharedPreferences.getString('nickName');
+    mail2 = sharedPreferences.getString('mail');
+    password2 = sharedPreferences.getString('password');
+
+    print(nickName2 + mail2 + password2 + '*************************************************');
+  }
+
   Future<void> loginControl(BuildContext context) async {
     _formKey.currentState.save();
+    loadUserInformation();
 
-    if (userName == 'yigit' && password == '123') {
+    if (mail == mail2 && password == password2) {
       print("Giriş Başarılı");
       Navigator.push(context,
           MaterialPageRoute(
@@ -117,7 +132,7 @@ class _SignInPageState extends State<SignInPage> {
                                     child: CustomTextField(
                                       baslik: "E-Mail or Nickname",
                                       isLighter: true,
-                                      onSaved: (input) => userName = input,
+                                      onSaved: (input) => mail = input,
                                     )),
                                 Container(
                                     padding:
